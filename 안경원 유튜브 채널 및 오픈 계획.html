@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>안경채널 3개월 수익화 로드맵 | 뷰트랩 X BPT V3.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark:    #0f1117;
+  --dark2:   #1a1d27;
+  --dark3:   #242838;
+  --blue:    #3b82f6;
+  --blue-l:  #dbeafe;
+  --teal:    #14b8a6;
+  --teal-l:  #ccfbf1;
+  --coral:   #ef4444;
+  --coral-l: #fee2e2;
+  --amber:   #f59e0b;
+  --amber-l: #fef3c7;
+  --purple:  #8b5cf6;
+  --purple-l:#ede9fe;
+  --green:   #22c55e;
+  --border:  rgba(255,255,255,0.08);
+  --text:    #e2e8f0;
+  --muted:   #94a3b8;
+  --sans:    'Noto Sans KR', sans-serif;
+  --serif:   'DM Serif Display', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--dark);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 유틸 ── */
+.container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700;
+  letter-spacing: .04em; white-space: nowrap;
+}
+.chip-blue   { background: var(--blue-l);   color: #1d4ed8; }
+.chip-teal   { background: var(--teal-l);   color: #0f766e; }
+.chip-coral  { background: var(--coral-l);  color: #b91c1c; }
+.chip-amber  { background: var(--amber-l);  color: #92400e; }
+.chip-purple { background: var(--purple-l); color: #6d28d9; }
+.chip-dark   { background: rgba(255,255,255,.12); color: #fff; }
+
+/* ── COVER ── */
+.cover {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 24px;
+}
+.cover-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 30%, #1e2d5e 0%, var(--dark) 70%);
+}
+.cover-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(59,130,246,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.cover-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(59,130,246,.18) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%,-55%);
+  pointer-events: none;
+}
+.cover-content { position: relative; z-index: 1; }
+.cover-tag {
+  display: inline-block;
+  padding: 6px 18px;
+  border: 1px solid rgba(59,130,246,.5);
+  border-radius: 999px;
+  font-size: 11px; font-weight: 700; letter-spacing: .12em;
+  color: var(--blue); text-transform: uppercase;
+  margin-bottom: 32px;
+  background: rgba(59,130,246,.08);
+}
+.cover h1 {
+  font-family: var(--serif);
+  font-size: clamp(40px, 8vw, 72px);
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.cover h1 em { font-style: italic; color: var(--blue); }
+.cover-sub {
+  font-size: 15px; color: var(--muted);
+  margin-bottom: 40px; max-width: 520px;
+}
+.cover-pills {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  justify-content: center; margin-bottom: 48px;
+}
+.cover-stat {
+  display: flex; gap: 48px; justify-content: center; flex-wrap: wrap;
+}
+.cover-stat-item { text-align: center; }
+.cover-stat-item .val {
+  font-family: var(--serif);
+  font-size: 36px; color: #fff; display: block; line-height: 1;
+}
+.cover-stat-item .lbl {
+  font-size: 11px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase;
+}
+.cover-scroll {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.cover-scroll span { font-size: 10px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--muted), transparent);
+  animation: scrollpulse 2s ease-in-out infinite;
+}
+@keyframes scrollpulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+/* ── SECTION ── */
+.section {
+  padding: 80px 0;
+  border-bottom: 1px solid var(--border);
+}
+.section:last-of-type { border-bottom: none; }
+.section-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--blue);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+}
+.section-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, rgba(59,130,246,.4), transparent);
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(26px, 4vw, 36px);
+  color: #fff; margin-bottom: 8px; line-height: 1.2;
+}
+.section-desc { color: var(--muted); font-size: 13px; margin-bottom: 40px; }
+
+/* ── 지표 카드 ── */
+.metric-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-bottom: 32px;
+}
+.metric-card {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px;
+  position: relative; overflow: hidden;
+}
+.metric-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: var(--accent, var(--blue));
+}
+.metric-card .kw {
+  font-weight: 700; font-size: 16px; color: #fff; margin-bottom: 14px;
+}
+.metric-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 5px 0; border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+.metric-row:last-child { border-bottom: none; }
+.metric-row .label { color: var(--muted); }
+.badge-good   { color: var(--teal);  font-weight: 700; font-size: 12px; }
+.badge-great  { color: var(--amber); font-weight: 700; font-size: 12px; }
+.badge-bad    { color: var(--coral); font-weight: 700; font-size: 12px; }
+.badge-na     { color: var(--muted); font-size: 12px; }
+
+/* 발견 박스 */
+.discovery-box {
+  background: linear-gradient(135deg, rgba(245,158,11,.12), rgba(245,158,11,.04));
+  border: 1px solid rgba(245,158,11,.3);
+  border-radius: 12px; padding: 20px 24px;
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.discovery-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+.discovery-title { font-weight: 700; color: var(--amber); margin-bottom: 6px; font-size: 13px; }
+.discovery-items { list-style: none; }
+.discovery-items li {
+  font-size: 13px; color: var(--text); padding: 3px 0;
+  padding-left: 14px; position: relative;
+}
+.discovery-items li::before {
+  content: '→'; position: absolute; left: 0; color: var(--amber);
+}
+
+/* ── 경쟁 채널 ── */
+.comp-table {
+  width: 100%; border-collapse: collapse;
+  background: var(--dark2); border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--border);
+}
+.comp-table th {
+  background: var(--dark3); color: var(--muted);
+  font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  padding: 12px 16px; text-align: left;
+}
+.comp-table td {
+  padding: 13px 16px; font-size: 13px; color: var(--text);
+  border-top: 1px solid var(--border);
+}
+.comp-table tr:last-child td {
+  background: rgba(59,130,246,.08); color: #fff; font-weight: 700;
+}
+.gap-badge {
+  display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;
+}
+.gap-none { background: rgba(239,68,68,.15); color: var(--coral); }
+.gap-part { background: rgba(245,158,11,.15); color: var(--amber); }
+.gap-win  { background: rgba(34,197,94,.15);  color: var(--green); }
+
+/* ── 패턴 카드 ── */
+.pattern-list { display: flex; flex-direction: column; gap: 12px; }
+.pattern-card {
+  display: grid; grid-template-columns: 56px 1fr;
+  background: var(--dark2); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+}
+.pattern-num {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: 28px; color: #fff;
+  padding: 16px 0;
+}
+.pattern-body { padding: 16px 18px; }
+.pattern-name { font-weight: 700; color: #fff; font-size: 14px; margin-bottom: 5px; }
+.pattern-ex   { font-size: 12px; color: var(--muted); margin-bottom: 5px; }
+.pattern-note { font-size: 12px; display: flex; align-items: flex-start; gap: 6px; }
+.pattern-note::before { content: '→'; flex-shrink: 0; }
+
+/* ── 로드맵 타임라인 ── */
+.roadmap-month { margin-bottom: 48px; }
+.month-header {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+}
+.month-badge {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: 22px; color: #fff; flex-shrink: 0;
+}
+.month-info .month-num { font-weight: 700; color: #fff; font-size: 16px; }
+.month-info .month-goal { font-size: 12px; color: var(--muted); }
+
+.week-grid { display: flex; flex-direction: column; gap: 10px; }
+.week-card {
+  display: grid; grid-template-columns: 52px 1fr auto;
+  align-items: center; gap: 0;
+  background: var(--dark2); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+  transition: border-color .2s, transform .15s;
+}
+.week-card:hover { border-color: rgba(255,255,255,.2); transform: translateX(3px); }
+.week-num-cell {
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 12px; color: var(--muted);
+  padding: 16px 0;
+  border-right: 1px solid var(--border);
+  background: var(--dark3);
+  height: 100%;
+}
+.week-body { padding: 12px 16px; }
+.week-title { font-weight: 500; color: #fff; font-size: 13px; margin-bottom: 4px; }
+.week-meta  { font-size: 11px; color: var(--muted); }
+.week-type  {
+  padding: 0 16px; font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  border-left: 1px solid var(--border);
+}
+.week-card.pulling .week-num-cell { border-left: 3px solid var(--blue); }
+.week-card.key     .week-num-cell { border-left: 3px solid var(--coral); }
+
+.key-comment {
+  margin-top: 12px;
+  background: rgba(239,68,68,.07);
+  border: 1px solid rgba(239,68,68,.2);
+  border-radius: 8px; padding: 12px 16px;
+}
+.key-comment .comment-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--coral); margin-bottom: 6px;
+}
+.key-comment .comment-text { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* ── 기획안 ── */
+.plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
+.plan-box {
+  background: var(--dark2); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+}
+.plan-box-head {
+  padding: 12px 16px;
+  font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+}
+.plan-box-body { padding: 14px 16px; font-size: 13px; line-height: 1.7; color: var(--text); }
+
+.title-cards { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.title-card {
+  display: flex; gap: 0;
+  background: var(--dark2); border: 1px solid var(--border); border-radius: 10px;
+  overflow: hidden;
+}
+.title-num {
+  width: 44px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: 20px; color: #fff;
+  background: var(--amber);
+}
+.title-body { padding: 12px 16px; flex: 1; }
+.title-text { font-size: 13px; color: #fff; font-weight: 500; margin-bottom: 4px; }
+.title-type { font-size: 11px; color: var(--amber); }
+
+.thumb-box {
+  background: var(--dark2); border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden; margin-bottom: 32px;
+}
+.thumb-head {
+  padding: 10px 16px; background: var(--dark3);
+  font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--muted);
+}
+.thumb-body { padding: 16px; }
+.thumb-row {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 7px 0; border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.thumb-row:last-child { border-bottom: none; }
+.thumb-label { color: var(--muted); min-width: 70px; flex-shrink: 0; font-size: 12px; font-weight: 700; }
+
+/* ── 스크립트 ── */
+.script-block { margin-bottom: 16px; }
+.script-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px; border-radius: 8px 8px 0 0;
+  font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+}
+.script-body {
+  background: var(--dark2); border: 1px solid var(--border);
+  border-top: none; border-radius: 0 0 8px 8px;
+  padding: 16px;
+}
+.script-line {
+  font-size: 14px; color: var(--text); padding: 4px 0;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.script-line::before { content: '』'; color: var(--muted); flex-shrink: 0; font-size: 12px; margin-top: 3px; }
+
+.comment-box {
+  background: linear-gradient(135deg, rgba(139,92,246,.1), rgba(139,92,246,.04));
+  border: 1px solid rgba(139,92,246,.3);
+  border-radius: 12px; padding: 20px 24px;
+}
+.comment-box .comment-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--purple); margin-bottom: 10px;
+}
+.comment-quote {
+  font-size: 14px; color: var(--text); line-height: 1.8;
+  border-left: 3px solid var(--purple); padding-left: 16px; margin-bottom: 10px;
+}
+.comment-note { font-size: 12px; color: var(--muted); }
+
+/* ── KPI ── */
+.kpi-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+  margin-bottom: 32px;
+}
+.kpi-card {
+  background: var(--dark2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 12px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.kpi-card::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; right: 0; height: 3px;
+  background: var(--kpi-color, var(--blue));
+}
+.kpi-val {
+  font-family: var(--serif);
+  font-size: 22px; color: #fff; display: block; margin-bottom: 4px;
+}
+.kpi-label { font-size: 10px; color: var(--muted); line-height: 1.4; }
+
+/* ── 체크리스트 ── */
+.checklist-group { margin-bottom: 20px; }
+.checklist-title {
+  font-size: 13px; font-weight: 700; color: var(--teal); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.checklist-title::before { content: '▸'; }
+.checklist { list-style: none; }
+.checklist li {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px;
+  background: var(--dark2); border: 1px solid var(--border);
+  border-radius: 6px; margin-bottom: 6px; font-size: 13px;
+  cursor: pointer; transition: background .15s;
+}
+.checklist li:hover { background: var(--dark3); }
+.checklist li::before {
+  content: ''; width: 16px; height: 16px; flex-shrink: 0;
+  border: 1.5px solid var(--border); border-radius: 4px;
+  transition: all .15s;
+}
+.checklist li.done::before {
+  background: var(--teal); border-color: var(--teal);
+  content: '✓'; color: #fff; font-size: 10px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+}
+.checklist li.done { text-decoration: line-through; color: var(--muted); }
+
+/* ── 최종 배너 ── */
+.final-banner {
+  background: linear-gradient(135deg, var(--dark3) 0%, #1e2d5e 100%);
+  border: 1px solid rgba(59,130,246,.3);
+  border-radius: 16px; padding: 40px; text-align: center; margin-top: 40px;
+}
+.final-banner h3 {
+  font-family: var(--serif); font-size: 28px; color: #fff; margin-bottom: 10px;
+}
+.final-banner p { color: var(--muted); font-size: 14px; max-width: 520px; margin: 0 auto; }
+.final-arrow {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; margin: 24px 0;
+}
+.arrow-step {
+  padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; color: #fff;
+}
+.arrow-line {
+  height: 2px; width: 32px; flex-shrink: 0;
+  background: var(--border);
+  position: relative;
+}
+.arrow-line::after {
+  content: '▶'; position: absolute; right: -6px; top: 50%;
+  transform: translateY(-50%); font-size: 10px; color: var(--muted);
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(15,17,23,.9); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+}
+.nav-logo { font-weight: 900; font-size: 14px; color: #fff; letter-spacing: -.02em; }
+.nav-logo span { color: var(--blue); }
+.nav-links { display: flex; gap: 4px; }
+.nav-link {
+  font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted); padding: 5px 12px; border-radius: 6px;
+  text-decoration: none; transition: color .15s, background .15s;
+}
+.nav-link:hover { color: #fff; background: rgba(255,255,255,.07); }
+
+@media (max-width: 640px) {
+  .metric-grid { grid-template-columns: 1fr; }
+  .plan-grid   { grid-template-columns: 1fr; }
+  .kpi-grid    { grid-template-columns: repeat(3, 1fr); }
+  .nav-links   { display: none; }
+}
+@media (max-width: 480px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">안경채널 <span>로드맵</span></div>
+  <div class="nav-links">
+    <a class="nav-link" href="#data">데이터</a>
+    <a class="nav-link" href="#pattern">패턴</a>
+    <a class="nav-link" href="#roadmap">로드맵</a>
+    <a class="nav-link" href="#plan">기획안</a>
+    <a class="nav-link" href="#script">원고</a>
+    <a class="nav-link" href="#kpi">KPI</a>
+    <a class="nav-link" href="#annual">연간계획</a>
+  </div>
+</nav>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-bg"></div>
+  <div class="cover-grid"></div>
+  <div class="cover-glow"></div>
+  <div class="cover-content">
+    <div class="cover-tag">뷰트랩 X BPT V3.0 · 안경채널 수익화 봇</div>
+    <h1>안경채널<br><em>3개월</em> 마스터플랜</h1>
+    <p class="cover-sub">뷰트랩 데이터 기반 풀링-키컨 전략 · 즉시 제작 기획안 · DB 수집 퍼널 설계</p>
+    <div class="cover-pills">
+      <span class="chip chip-blue">🧲 풀링 8편</span>
+      <span class="chip chip-coral">🔑 키컨 4편</span>
+      <span class="chip chip-teal">📐 안경사 전문 자격증</span>
+      <span class="chip chip-amber">💎 린드버그 · 크롬하츠</span>
+      <span class="chip chip-purple">🏪 오프라인 안경원 오픈</span>
+    </div>
+    <div class="cover-stat">
+      <div class="cover-stat-item">
+        <span class="val">12</span>
+        <span class="lbl">주차 로드맵</span>
+      </div>
+      <div class="cover-stat-item">
+        <span class="val">3</span>
+        <span class="lbl">키워드 분석</span>
+      </div>
+      <div class="cover-stat-item">
+        <span class="val">6</span>
+        <span class="lbl">썸네일 패턴</span>
+      </div>
+      <div class="cover-stat-item">
+        <span class="val">100+</span>
+        <span class="lbl">영상 분석</span>
+      </div>
+    </div>
+  </div>
+  <div class="cover-scroll">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- PART 1: 데이터 분석 -->
+<section class="section" id="data">
+  <div class="container">
+    <div class="section-label">PART 01</div>
+    <h2 class="section-title">뷰트랩 데이터 분석 결과</h2>
+    <p class="section-desc">안경 · 선글라스 · 크롬하츠 3개 키워드 전수 분석</p>
+
+    <div class="metric-grid">
+      <div class="metric-card" style="--accent: var(--blue)">
+        <div class="kw">🔍 안경 키워드</div>
+        <div class="metric-row"><span class="label">기여도</span><span class="badge-good">Good ✓</span></div>
+        <div class="metric-row"><span class="label">성과도</span><span class="badge-good">Good ✓</span></div>
+        <div class="metric-row"><span class="label">노출확률</span><span class="badge-great">일부 Great ⭐</span></div>
+        <div class="metric-row"><span class="label">전략</span><span class="chip chip-blue" style="font-size:10px">풀링 + 키컨 혼합</span></div>
+      </div>
+      <div class="metric-card" style="--accent: var(--teal)">
+        <div class="kw">☀️ 선글라스 키워드</div>
+        <div class="metric-row"><span class="label">기여도</span><span class="badge-good">Good ✓</span></div>
+        <div class="metric-row"><span class="label">성과도</span><span class="badge-good">Good ✓</span></div>
+        <div class="metric-row"><span class="label">노출확률</span><span class="badge-na">측정불가</span></div>
+        <div class="metric-row"><span class="label">전략</span><span class="chip chip-teal" style="font-size:10px">풀링 (확장)</span></div>
+      </div>
+      <div class="metric-card" style="--accent: var(--purple)">
+        <div class="kw">💀 크롬하츠 키워드</div>
+        <div class="metric-row"><span class="label">기여도</span><span class="badge-good">Good ✓</span></div>
+        <div class="metric-row"><span class="label">성과도</span><span class="badge-good">Good ✓</span></div>
+        <div class="metric-row"><span class="label">노출확률</span><span class="badge-na">측정불가</span></div>
+        <div class="metric-row"><span class="label">전략</span><span class="chip chip-purple" style="font-size:10px">풀링 (하이엔드)</span></div>
+      </div>
+    </div>
+
+    <div class="discovery-box" style="margin-bottom: 40px">
+      <div class="discovery-icon">⭐</div>
+      <div>
+        <div class="discovery-title">즉시 제작 우선순위 발견 — Great 지표 확인</div>
+        <ul class="discovery-items">
+          <li>안경쟁이 채널: 안경세척 주제 → 기여도 Great + 성과도 Great + 노출확률 Great</li>
+          <li>포인트안경TV: 다초점 주제 → 기여도 Good + 성과도 Good + 노출확률 Great</li>
+          <li>이 두 주제가 1주차, 7주차의 핵심 영상 주제</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="color:#fff; font-size:16px; font-weight:700; margin-bottom:16px">경쟁 채널 포지션 분석</h3>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>채널명</th>
+          <th>구독자</th>
+          <th>포지션</th>
+          <th>공백 여부</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>안경고수 최병무</td>
+          <td>11.7만</td>
+          <td>정보 제공형 (가격/렌즈)</td>
+          <td><span class="gap-badge gap-none">❌ 프리미엄 피팅 없음</span></td>
+        </tr>
+        <tr>
+          <td>무극안경 손재환</td>
+          <td>8.2만</td>
+          <td>정보 제공형 (다양)</td>
+          <td><span class="gap-badge gap-none">❌ 프리미엄 특화 없음</span></td>
+        </tr>
+        <tr>
+          <td>안경카페</td>
+          <td>2.3만</td>
+          <td>정보 취합형</td>
+          <td><span class="gap-badge gap-none">❌ 전문성 약함</span></td>
+        </tr>
+        <tr>
+          <td>포인트안경TV</td>
+          <td>2,050</td>
+          <td>다초점 특화</td>
+          <td><span class="gap-badge gap-part">△ 일부 겹침</span></td>
+        </tr>
+        <tr>
+          <td>레티나 안경사</td>
+          <td>8,430</td>
+          <td>혼합형</td>
+          <td><span class="gap-badge gap-none">❌ 프리미엄 없음</span></td>
+        </tr>
+        <tr>
+          <td>⬛ 내 채널 목표</td>
+          <td>—</td>
+          <td>프리미엄 피팅 전문 셀렉샵</td>
+          <td><span class="gap-badge gap-win">✅ 공백 포지션 선점</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PART 2: 썸네일 패턴 -->
+<section class="section" id="pattern">
+  <div class="container">
+    <div class="section-label">PART 02</div>
+    <h2 class="section-title">썸네일 성공 패턴 분류</h2>
+    <p class="section-desc">기여도+성과도 Good 이상 영상 100개+ 분석 — 6가지 패턴으로 수렴</p>
+
+    <div class="pattern-list">
+      <div class="pattern-card">
+        <div class="pattern-num" style="background: linear-gradient(135deg,#ef4444,#dc2626)">①</div>
+        <div class="pattern-body">
+          <div class="pattern-name">경고+손해형 <span class="chip chip-coral" style="margin-left:6px">키컨 최적</span></div>
+          <div class="pattern-ex">"이렇게 닦으면 망합니다" / "호구 당하는 렌즈 고르는 법"</div>
+          <div class="pattern-note" style="color:var(--muted)">공포·위기감 자극. 클릭률 최고. 키컨에 특히 적합</div>
+        </div>
+      </div>
+      <div class="pattern-card">
+        <div class="pattern-num" style="background: linear-gradient(135deg,#3b82f6,#2563eb)">②</div>
+        <div class="pattern-body">
+          <div class="pattern-name">전문가 폭로형 <span class="chip chip-blue" style="margin-left:6px">풀링+키컨</span></div>
+          <div class="pattern-ex">"안경사들이 절대 하지 않는" / "아무도 알려주지 않는 진실"</div>
+          <div class="pattern-note" style="color:var(--muted)">독점 정보 느낌. 구독 전환율 높음. 풀링·키컨 모두 적용 가능</div>
+        </div>
+      </div>
+      <div class="pattern-card">
+        <div class="pattern-num" style="background: linear-gradient(135deg,#8b5cf6,#7c3aed)">③</div>
+        <div class="pattern-body">
+          <div class="pattern-name">브랜드 계급도형 <span class="chip chip-purple" style="margin-left:6px">프리미엄 유입</span></div>
+          <div class="pattern-ex">"안경사가 뽑은 브랜드 티어 S/A/B급" / "수입 안경 계급도"</div>
+          <div class="pattern-note" style="color:var(--muted)">프리미엄 타겟 집중 유입. 린드버그·크롬하츠 연결에 최적</div>
+        </div>
+      </div>
+      <div class="pattern-card">
+        <div class="pattern-num" style="background: linear-gradient(135deg,#f59e0b,#d97706)">④</div>
+        <div class="pattern-body">
+          <div class="pattern-name">가격 반전형 <span class="chip chip-amber" style="margin-left:6px">풀링 고조회수</span></div>
+          <div class="pattern-ex">"60만원 vs 10만원 — 뭐가 다른가?" / "100만원 안경 원가는?"</div>
+          <div class="pattern-note" style="color:var(--muted)">호기심+반전 자극. 조회수 높음. 풀링 주력 포맷</div>
+        </div>
+      </div>
+      <div class="pattern-card">
+        <div class="pattern-num" style="background: linear-gradient(135deg,#14b8a6,#0d9488)">⑤</div>
+        <div class="pattern-body">
+          <div class="pattern-name">피팅·외모 변환형 <span class="chip chip-teal" style="margin-left:6px">패션 타겟</span></div>
+          <div class="pattern-ex">"안경 쓰면 외모 떡상합니다" / "이런 안경테 쓰면 나이 들어 보여요"</div>
+          <div class="pattern-note" style="color:var(--muted)">30-40대 패션 타겟 유입. 여성 구독자에게 특히 유효</div>
+        </div>
+      </div>
+      <div class="pattern-card">
+        <div class="pattern-num" style="background: linear-gradient(135deg,#6d28d9,#5b21b6)">⑥</div>
+        <div class="pattern-body">
+          <div class="pattern-name">크롬하츠 특화형 <span class="chip chip-purple" style="margin-left:6px">하이엔드 팬덤</span></div>
+          <div class="pattern-ex">"국내 최다 44분 리뷰" / "짝퉁 아닌 진짜 사는 법" / "선을 넘어버린 가격"</div>
+          <div class="pattern-note" style="color:var(--muted)">하이엔드 팬덤 형성. 프리미엄 채널 신뢰도 구축 핵심</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 3: 로드맵 -->
+<section class="section" id="roadmap">
+  <div class="container">
+    <div class="section-label">PART 03</div>
+    <h2 class="section-title">3개월 채널 로드맵</h2>
+    <p class="section-desc">넓게 모아서 좁게 전환 — 1개월 각인 → 2개월 확장 → 3개월 전환</p>
+
+    <!-- 1개월 -->
+    <div class="roadmap-month">
+      <div class="month-header">
+        <div class="month-badge" style="background: linear-gradient(135deg,#1e3a8a,#2563eb)">1</div>
+        <div class="month-info">
+          <div class="month-num">1개월차 — 신뢰 구축 (풀링 집중)</div>
+          <div class="month-goal">목표: 안경사 전문가로 포지셔닝, 구독자 기반 확보</div>
+        </div>
+      </div>
+      <div class="week-grid">
+        <div class="week-card pulling">
+          <div class="week-num-cell">1주</div>
+          <div class="week-body">
+            <div class="week-title">안경 세척법 — 잘못된 행동 3가지</div>
+            <div class="week-meta">썸네일: 유형⑨ 경고+대안형 &nbsp;·&nbsp; 목표: 안경사 신뢰 1차 각인</div>
+          </div>
+          <div class="week-type">🧲</div>
+        </div>
+        <div class="week-card pulling">
+          <div class="week-num-cell">2주</div>
+          <div class="week-body">
+            <div class="week-title">안경테 5만원 vs 60만원 — 진짜 차이는?</div>
+            <div class="week-meta">썸네일: 유형④ 가격반전형 &nbsp;·&nbsp; 목표: 호기심 유입</div>
+          </div>
+          <div class="week-type">🧲</div>
+        </div>
+        <div class="week-card pulling">
+          <div class="week-num-cell">3주</div>
+          <div class="week-body">
+            <div class="week-title">안경사가 직접 쓰는 안경 (린드버그 첫 공개)</div>
+            <div class="week-meta">썸네일: 유형㉓ 유튜브 최초형 &nbsp;·&nbsp; 목표: 프리미엄 포지셔닝</div>
+          </div>
+          <div class="week-type">🧲</div>
+        </div>
+        <div class="week-card pulling">
+          <div class="week-num-cell">4주</div>
+          <div class="week-body">
+            <div class="week-title">내 얼굴형에 맞는 안경테 고르는 법</div>
+            <div class="week-meta">썸네일: 유형⑤ 이것만 알면형 &nbsp;·&nbsp; 목표: 일반 타겟 폭넓게 유입</div>
+          </div>
+          <div class="week-type">🧲</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2개월 -->
+    <div class="roadmap-month">
+      <div class="month-header">
+        <div class="month-badge" style="background: linear-gradient(135deg,#7f1d1d,#ef4444)">2</div>
+        <div class="month-info">
+          <div class="month-num">2개월차 — 확장 + 키컨 혼합</div>
+          <div class="month-goal">목표: 선글라스·크롬하츠로 팬덤 확장, 첫 키컨 삽입</div>
+        </div>
+      </div>
+      <div class="week-grid">
+        <div class="week-card pulling">
+          <div class="week-num-cell">5주</div>
+          <div class="week-body">
+            <div class="week-title">2025 선글라스 트렌드 — 패션고수들이 쓰는 TOP3</div>
+            <div class="week-meta">썸네일: 유형③ 브랜드계급형 &nbsp;·&nbsp; 목표: 패션 타겟 유입</div>
+          </div>
+          <div class="week-type">🧲</div>
+        </div>
+        <div class="week-card pulling">
+          <div class="week-num-cell">6주</div>
+          <div class="week-body">
+            <div class="week-title">크롬하츠 안경 — 비싼 이유 안경사가 직접 분석</div>
+            <div class="week-meta">썸네일: 유형② 전문가폭로형 &nbsp;·&nbsp; 목표: 하이엔드 팬덤 확보</div>
+          </div>
+          <div class="week-type">🧲</div>
+        </div>
+        <div class="week-card key">
+          <div class="week-num-cell">7주</div>
+          <div class="week-body">
+            <div class="week-title">다초점 안경 — 맞추기 전 이것 모르면 100% 실패합니다</div>
+            <div class="week-meta">썸네일: 유형① 손해·후회형 &nbsp;·&nbsp; 목표: 40-50대 전환</div>
+          </div>
+          <div class="week-type">🔑</div>
+        </div>
+        <div class="week-card key">
+          <div class="week-num-cell">8주</div>
+          <div class="week-body">
+            <div class="week-title">안경 피팅 — 안경원에서 절대 말 안 해주는 진실</div>
+            <div class="week-meta">썸네일: 유형② 전문가폭로형 &nbsp;·&nbsp; 목표: 피팅 전문성 강조</div>
+          </div>
+          <div class="week-type">🔑</div>
+        </div>
+      </div>
+      <div class="key-comment" style="margin-top:12px">
+        <div class="comment-label">7주차 키컨 고정댓글 예시</div>
+        <div class="comment-text">"다초점 맞추실 계획이신가요? 안경원마다 피팅 실력 차이가 어마어마합니다. 제대로 된 피팅이 어떤 건지, 아래 링크에서 먼저 확인해보세요."</div>
+      </div>
+    </div>
+
+    <!-- 3개월 -->
+    <div class="roadmap-month">
+      <div class="month-header">
+        <div class="month-badge" style="background: linear-gradient(135deg,#064e3b,#14b8a6)">3</div>
+        <div class="month-info">
+          <div class="month-num">3개월차 — 전환 집중 + 안경원 오픈 준비</div>
+          <div class="month-goal">목표: 팬이 된 구독자를 실제 방문 고객으로 전환, DB 수집</div>
+        </div>
+      </div>
+      <div class="week-grid">
+        <div class="week-card pulling">
+          <div class="week-num-cell">9주</div>
+          <div class="week-body">
+            <div class="week-title">수입 안경 브랜드 계급도 — S/A/B급 솔직 정리</div>
+            <div class="week-meta">썸네일: 유형③ 브랜드계급형 &nbsp;·&nbsp; 목표: 프리미엄 타겟 집중 유입</div>
+          </div>
+          <div class="week-type">🧲</div>
+        </div>
+        <div class="week-card key">
+          <div class="week-num-cell">10주</div>
+          <div class="week-body">
+            <div class="week-title">100만원짜리 안경 망치는 실수 — 피팅이 전부입니다</div>
+            <div class="week-meta">썸네일: 유형① 손해·후회형 &nbsp;·&nbsp; 목표: 고가 구매자 설득</div>
+          </div>
+          <div class="week-type">🔑</div>
+        </div>
+        <div class="week-card key">
+          <div class="week-num-cell">11주</div>
+          <div class="week-body">
+            <div class="week-title">안경원 오픈합니다 — 이런 곳 만들 겁니다</div>
+            <div class="week-meta">썸네일: 유형㉗ 욕먹을각오형 &nbsp;·&nbsp; 목표: 오픈 예고 + DB 수집 시작</div>
+          </div>
+          <div class="week-type">🔑</div>
+        </div>
+        <div class="week-card key">
+          <div class="week-num-cell">12주</div>
+          <div class="week-body">
+            <div class="week-title">[오픈] 구독자 한정 피팅 체험 모집</div>
+            <div class="week-meta">썸네일: 유형⑪ 대상행동형 &nbsp;·&nbsp; 목표: 첫 방문객 모집 완료</div>
+          </div>
+          <div class="week-type">🔑</div>
+        </div>
+      </div>
+      <div class="key-comment" style="margin-top:12px">
+        <div class="comment-label">11주차 핵심 — 첫 랜딩페이지 고정댓글</div>
+        <div class="comment-text">"이런 안경원을 만들 겁니다. 오픈 소식 가장 먼저 받고 싶으신 분은 아래 링크에 연락처 남겨주세요." → DB 수집 퍼널 시작</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 4: 기획안 -->
+<section class="section" id="plan">
+  <div class="container">
+    <div class="section-label">PART 04</div>
+    <h2 class="section-title">즉시 제작 1번 영상 기획안</h2>
+    <p class="section-desc">안경세척 주제 — Great+Great+Great 검증된 주제로 첫 영상 선점</p>
+
+    <div class="plan-grid" style="margin-bottom:28px">
+      <div class="plan-box">
+        <div class="plan-box-head" style="background:rgba(59,130,246,.15); color:var(--blue)">타겟 / 욕구</div>
+        <div class="plan-box-body">안경을 맞췄는데 불편하고, 비싼 돈 주고 샀는데 제대로 쓰고 있는지 모르는 <strong style="color:#fff">30~50대</strong></div>
+      </div>
+      <div class="plan-box">
+        <div class="plan-box-head" style="background:rgba(20,184,166,.15); color:var(--teal)">전략 구분</div>
+        <div class="plan-box-body">🧲 <strong style="color:#fff">풀링 (확장)</strong> — 채널 초기 신뢰 구축 최우선. 정보를 아낌없이 퍼줘서 팬덤 형성</div>
+      </div>
+    </div>
+    <div class="plan-box" style="margin-bottom:28px">
+      <div class="plan-box-head" style="background:rgba(245,158,11,.15); color:var(--amber)">선정 근거</div>
+      <div class="plan-box-body">안경쟁이 채널에서 안경세척 주제가 기여도 Great + 성과도 Great + 노출확률 Great 기록. 경쟁 영상 수 적고 안경사 자격증 보유자가 다루면 즉시 차별화. 채널 첫 영상으로 "이 사람 진짜 전문가구나"라는 인식을 가장 빠르게 심을 수 있는 주제.</div>
+    </div>
+
+    <h3 style="color:#fff; font-size:15px; font-weight:700; margin-bottom:14px">영상 제목 3가지</h3>
+    <div class="title-cards">
+      <div class="title-card">
+        <div class="title-num">①</div>
+        <div class="title-body">
+          <div class="title-text">안경사들이 절대 하지 않는 안경 세척 행동 3가지</div>
+          <div class="title-type">→ 유형② 전문가 폭로형 적용</div>
+        </div>
+      </div>
+      <div class="title-card">
+        <div class="title-num">②</div>
+        <div class="title-body">
+          <div class="title-text">2년 쓴 안경, 1분 만에 새 안경 만드는 방법 — 안경사가 알려주는 진짜 세척법</div>
+          <div class="title-type">→ 유형㉕ 진입장벽 제거형 적용</div>
+        </div>
+      </div>
+      <div class="title-card">
+        <div class="title-num">③</div>
+        <div class="title-body">
+          <div class="title-text">이렇게 닦으면 망합니다. 안경 렌즈 코팅 날리는 행동 TOP3</div>
+          <div class="title-type">→ 유형⑨ 경고+대안 제시형 적용</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="thumb-box">
+      <div class="thumb-head">썸네일 디렉팅</div>
+      <div class="thumb-body">
+        <div class="thumb-row">
+          <span class="thumb-label">화면 구성</span>
+          <span>좌측 뿌옇고 흠집난 렌즈 클로즈업 (Before) vs 우측 선명하게 빛나는 렌즈 (After). 중앙 빨간 X 표시</span>
+        </div>
+        <div class="thumb-row">
+          <span class="thumb-label">핵심 카피</span>
+          <span>"이렇게 닦으면 망합니다" — 검정 배경에 흰색+빨간색 굵은 폰트. 글자 크기 최대</span>
+        </div>
+        <div class="thumb-row">
+          <span class="thumb-label">얼굴 배치</span>
+          <span>우측 하단, 놀란 표정으로 작게. 안경사 가운 착용 권장</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 5: 원고 -->
+<section class="section" id="script">
+  <div class="container">
+    <div class="section-label">PART 05</div>
+    <h2 class="section-title">오프닝 30초 시나리오 + 고정댓글</h2>
+    <p class="section-desc">BPT 8주차 원고 작성법 기반 — 공감 설계 (문제제기 → 공감 → 해결책 유인)</p>
+
+    <div class="script-block">
+      <div class="script-head" style="background:rgba(239,68,68,.15); color:var(--coral)">
+        <span>●</span> 문제 제기 (Hook)
+      </div>
+      <div class="script-body">
+        <div class="script-line">혹시 안경 닦을 때 옷에 쓱 문지르시나요?</div>
+        <div class="script-line">아니면 흐르는 물에 대충 헹구시나요?</div>
+        <div class="script-line">솔직히 말씀드릴게요.</div>
+        <div class="script-line">그거, 렌즈 코팅 갈아먹는 겁니다.</div>
+      </div>
+    </div>
+
+    <div class="script-block">
+      <div class="script-head" style="background:rgba(59,130,246,.15); color:var(--blue)">
+        <span>●</span> 공감 형성 (Empathy)
+      </div>
+      <div class="script-body">
+        <div class="script-line">안경원 오시는 분들 중에,</div>
+        <div class="script-line">산 지 6개월도 안 됐는데 렌즈가 뿌옇다고 오시는 분들 정말 많거든요.</div>
+        <div class="script-line">그분들한테 어떻게 닦으셨냐고 여쭤보면,</div>
+        <div class="script-line">거의 다 똑같이 하시더라고요.</div>
+      </div>
+    </div>
+
+    <div class="script-block">
+      <div class="script-head" style="background:rgba(20,184,166,.15); color:var(--teal)">
+        <span>●</span> 해결책 유인 (Promise)
+      </div>
+      <div class="script-body">
+        <div class="script-line">오늘 이 영상 하나면,</div>
+        <div class="script-line">지금 쓰시는 안경 수명이 두 배는 늘어납니다.</div>
+        <div class="script-line">3분만 투자하세요.</div>
+      </div>
+    </div>
+
+    <div class="comment-box">
+      <div class="comment-label">고정댓글 카피 — 풀링 → 키컨 연결 장치</div>
+      <div class="comment-quote">
+        "안경 세척은 잘 하고 계신데, 혹시 안경이 자꾸 흘러내리거나<br>
+        한쪽 귀가 아프다면? 그건 세척 문제가 아니라 피팅 문제입니다.<br>
+        아래 링크에서 확인하세요."
+      </div>
+      <div class="comment-note">→ 세척 정보를 충분히 받은 시청자가 '피팅' 문제로 자연스럽게 이동하도록 설계된 연결 장치. 이 고정댓글이 풀링 → 키컨 전환의 핵심입니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PART 6: KPI -->
+<section class="section" id="kpi">
+  <div class="container">
+    <div class="section-label">PART 06</div>
+    <h2 class="section-title">KPI 목표치 & 체크리스트</h2>
+    <p class="section-desc">기어비(조회수 1당 매출)를 올리기 위한 핵심 지표 관리</p>
+
+    <div class="kpi-grid">
+      <div class="kpi-card" style="--kpi-color:var(--blue)">
+        <span class="kpi-val">10%</span>
+        <div class="kpi-label">CTR<br>클릭률</div>
+      </div>
+      <div class="kpi-card" style="--kpi-color:var(--teal)">
+        <span class="kpi-val">60%</span>
+        <div class="kpi-label">초반 30초<br>유지율</div>
+      </div>
+      <div class="kpi-card" style="--kpi-color:var(--purple)">
+        <span class="kpi-val">4분</span>
+        <div class="kpi-label">평균<br>시청시간</div>
+      </div>
+      <div class="kpi-card" style="--kpi-color:var(--amber)">
+        <span class="kpi-val">5%</span>
+        <div class="kpi-label">풀링→키컨<br>연계 클릭률</div>
+      </div>
+      <div class="kpi-card" style="--kpi-color:var(--coral)">
+        <span class="kpi-val">1~3%</span>
+        <div class="kpi-label">랜딩<br>전환율</div>
+      </div>
+    </div>
+
+    <div class="checklist-group">
+      <div class="checklist-title">풀링 콘텐츠 문제 체크</div>
+      <ul class="checklist" id="cl1">
+        <li onclick="this.classList.toggle('done')">클릭률(CTR)이 10% 이하인가?</li>
+        <li onclick="this.classList.toggle('done')">초반 30초 이탈률이 40% 이상인가?</li>
+        <li onclick="this.classList.toggle('done')">키컨과의 연계 멘트/카드가 부족한가?</li>
+        <li onclick="this.classList.toggle('done')">시청 지속 시간이 4분 미만인가?</li>
+        <li onclick="this.classList.toggle('done')">잠재 시장이 너무 좁지 않은가? (→ 상위 카테고리로 피벗)</li>
+      </ul>
+    </div>
+    <div class="checklist-group">
+      <div class="checklist-title">랜딩페이지 문제 체크</div>
+      <ul class="checklist">
+        <li onclick="this.classList.toggle('done')">고정댓글 카피가 충분히 매력적인가?</li>
+        <li onclick="this.classList.toggle('done')">도입부 공감이 충분한가?</li>
+        <li onclick="this.classList.toggle('done')">수요 대비 공급이 통제되어 있는가?</li>
+        <li onclick="this.classList.toggle('done')">영상 업로드 주기와 완판 소요시간이 맞는가?</li>
+      </ul>
+    </div>
+
+    <div class="final-banner">
+      <h3>전체 전략 한 줄 요약</h3>
+      <div class="final-arrow">
+        <div class="arrow-step" style="background:rgba(59,130,246,.2); border:1px solid rgba(59,130,246,.4)">1개월<br><span style="font-size:11px;font-weight:400;color:var(--muted)">전문가 각인</span></div>
+        <div class="arrow-line"></div>
+        <div class="arrow-step" style="background:rgba(239,68,68,.2); border:1px solid rgba(239,68,68,.4)">2개월<br><span style="font-size:11px;font-weight:400;color:var(--muted)">팬덤 확장</span></div>
+        <div class="arrow-line"></div>
+        <div class="arrow-step" style="background:rgba(20,184,166,.2); border:1px solid rgba(20,184,166,.4)">3개월<br><span style="font-size:11px;font-weight:400;color:var(--muted)">수익 전환</span></div>
+        <div class="arrow-line"></div>
+        <div class="arrow-step" style="background:rgba(139,92,246,.2); border:1px solid rgba(139,92,246,.4)">4~6개월<br><span style="font-size:11px;font-weight:400;color:var(--muted)">안경원 운영</span></div>
+        <div class="arrow-line"></div>
+        <div class="arrow-step" style="background:rgba(245,158,11,.2); border:1px solid rgba(245,158,11,.4)">7~12개월<br><span style="font-size:11px;font-weight:400;color:var(--muted)">브랜드 확장</span></div>
+      </div>
+      <p>"이 사람한테 안경 맞추고 싶다"는 사람만 골라서 전환합니다</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     PART 7: 연간 로드맵 (4~12개월)
+════════════════════════════════════════ -->
+<style>
+/* 연간 로드맵 추가 스타일 */
+.phase-header {
+  display: flex; align-items: center; gap: 16px;
+  padding: 18px 22px; border-radius: 12px; margin-bottom: 20px;
+  position: relative; overflow: hidden;
+}
+.phase-header::before {
+  content: ''; position: absolute; inset: 0;
+  background: inherit; opacity: .12; z-index: 0;
+}
+.phase-header > * { position: relative; z-index: 1; }
+.phase-number {
+  font-family: var(--serif); font-size: 32px; color: #fff;
+  width: 52px; text-align: center; flex-shrink: 0;
+}
+.phase-info { flex: 1; }
+.phase-name  { font-weight: 700; font-size: 16px; color: #fff; margin-bottom: 4px; }
+.phase-goal  { font-size: 12px; color: rgba(255,255,255,.65); }
+.phase-kpi   { text-align: right; flex-shrink: 0; }
+.phase-kpi .kv { font-family: var(--serif); font-size: 20px; color: #fff; display: block; }
+.phase-kpi .kl { font-size: 10px; color: rgba(255,255,255,.5); letter-spacing:.06em; text-transform:uppercase; }
+
+.month-block { margin-bottom: 32px; }
+.month-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 10px;
+}
+.month-label::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+.content-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;
+}
+@media(max-width:600px){ .content-row { grid-template-columns: 1fr; } }
+
+.content-card {
+  background: var(--dark2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 14px;
+  display: flex; gap: 10px; align-items: flex-start;
+  transition: border-color .2s, transform .15s;
+}
+.content-card:hover { border-color: rgba(255,255,255,.18); transform: translateY(-1px); }
+.content-card .type-dot {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+}
+.content-card .card-title { font-size: 13px; font-weight: 500; color: #fff; margin-bottom: 3px; }
+.content-card .card-meta  { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+.strategy-box {
+  border-radius: 10px; padding: 14px 18px; margin-top: 12px;
+  font-size: 13px; display: flex; gap: 12px; align-items: flex-start;
+}
+.strategy-box .s-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.strategy-box .s-title { font-weight: 700; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing:.06em; }
+.strategy-box .s-body  { color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+.milestone-row {
+  display: flex; gap: 0; margin: 32px 0;
+  background: var(--dark2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+}
+.milestone-item {
+  flex: 1; padding: 16px 14px; text-align: center; position: relative;
+  border-right: 1px solid var(--border);
+}
+.milestone-item:last-child { border-right: none; }
+.milestone-item .m-month { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing:.08em; margin-bottom: 6px; }
+.milestone-item .m-event { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.milestone-item .m-desc  { font-size: 11px; color: var(--muted); line-height: 1.5; }
+.milestone-dot {
+  width: 8px; height: 8px; border-radius: 50%; margin: 0 auto 8px; background: var(--muted);
+}
+
+.annual-summary {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-top: 40px;
+}
+@media(max-width:600px){ .annual-summary { grid-template-columns: repeat(2,1fr); } }
+.summary-card {
+  background: var(--dark2); border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px 16px; text-align: center;
+}
+.summary-card .s-val {
+  font-family: var(--serif); font-size: 30px; color: #fff; display: block; margin-bottom: 4px;
+}
+.summary-card .s-lbl { font-size: 11px; color: var(--muted); }
+
+.revenue-table {
+  width: 100%; border-collapse: collapse;
+  background: var(--dark2); border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--border); margin-top: 32px;
+}
+.revenue-table th {
+  background: var(--dark3); color: var(--muted); font-size: 11px; font-weight: 700;
+  letter-spacing:.08em; text-transform:uppercase; padding: 12px 16px; text-align:left;
+}
+.revenue-table td {
+  padding: 13px 16px; font-size: 13px; color: var(--text);
+  border-top: 1px solid var(--border);
+}
+.revenue-table tr:last-child td { font-weight: 700; color: #fff; background: rgba(34,197,94,.06); }
+.rev-badge {
+  display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;
+}
+</style>
+
+<section class="section" id="annual">
+  <div class="container">
+    <div class="section-label">PART 07</div>
+    <h2 class="section-title">연간 로드맵 (4~12개월)</h2>
+    <p class="section-desc">안경원 오픈 이후 — 채널 × 매장 × 브랜드 3개 축을 동시에 성장시키는 전략</p>
+
+    <!-- 마일스톤 타임라인 -->
+    <div class="milestone-row">
+      <div class="milestone-item">
+        <div class="milestone-dot" style="background:var(--blue)"></div>
+        <div class="m-month">M 1~3</div>
+        <div class="m-event">채널 구축</div>
+        <div class="m-desc">풀링 8편<br>키컨 4편<br>DB 수집 시작</div>
+      </div>
+      <div class="milestone-item">
+        <div class="milestone-dot" style="background:var(--coral)"></div>
+        <div class="m-month">M 4~6</div>
+        <div class="m-event">안경원 오픈</div>
+        <div class="m-desc">구독자 전환<br>첫 매출 발생<br>피팅 브랜딩</div>
+      </div>
+      <div class="milestone-item">
+        <div class="milestone-dot" style="background:var(--purple)"></div>
+        <div class="m-month">M 7~9</div>
+        <div class="m-event">온라인 판매</div>
+        <div class="m-desc">공동구매 시작<br>자체 상품 기획<br>블로그 병행</div>
+      </div>
+      <div class="milestone-item">
+        <div class="milestone-dot" style="background:var(--amber)"></div>
+        <div class="m-month">M 10~12</div>
+        <div class="m-event">브랜드 확립</div>
+        <div class="m-desc">협찬/제휴 유입<br>자체 PB 검토<br>2호점 준비</div>
+      </div>
+    </div>
+
+    <!-- ── 4개월차 ── -->
+    <div class="phase-header" style="background:rgba(139,92,246,.25); border:1px solid rgba(139,92,246,.3)">
+      <div class="phase-number">4</div>
+      <div class="phase-info">
+        <div class="phase-name">4개월차 — 안경원 오픈 + 첫 전환 회수</div>
+        <div class="phase-goal">목표: 채널 구독자 → 실제 방문 고객 전환, 오픈 초기 입소문 설계</div>
+      </div>
+      <div class="phase-kpi">
+        <span class="kv">구독 1K+</span>
+        <span class="kl">목표 구독자</span>
+      </div>
+    </div>
+    <div class="content-row">
+      <div class="content-card">
+        <div class="type-dot" style="background:rgba(239,68,68,.2)">🔑</div>
+        <div>
+          <div class="card-title">안경원 오픈 브이로그 — 이런 공간 만들었습니다</div>
+          <div class="card-meta">키컨 | 유형㉗ 욕먹을각오형 | 내부 공개 + 철학 공유</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="type-dot" style="background:rgba(59,130,246,.2)">🧲</div>
+        <div>
+          <div class="card-title">린드버그 피팅 전 후 — 같은 안경이 이렇게 달라집니다</div>
+          <div class="card-meta">풀링 | 유형⑤ 피팅변환형 | 피팅 전문성 시각화</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="type-dot" style="background:rgba(239,68,68,.2)">🔑</div>
+        <div>
+          <div class="card-title">100만원 안경 맞추러 왔는데 안경원이 이렇게 달랐습니다</div>
+          <div class="card-meta">키컨 | 유형① 손해후회형 | 고가 구매자 유입</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="type-dot" style="background:rgba(59,130,246,.2)">🧲</div>
+        <div>
+          <div class="card-title">안경 피팅 — 코받침 하나 바꿨을 뿐인데 일어난 일</div>
+          <div class="card-meta">풀링 | 유형⑦ 인과관계형 | 피팅 구체적 가치 전달</div>
+        </div>
+      </div>
+    </div>
+    <div class="strategy-box" style="background:rgba(139,92,246,.07); border:1px solid rgba(139,92,246,.2)">
+      <div class="s-icon">💡</div>
+      <div>
+        <div class="s-title" style="color:var(--purple)">4개월 핵심 전략</div>
+        <div class="s-body">오픈 브이로그 고정댓글 = 첫 번째 공식 랜딩페이지. "예약 방문 신청" 링크로 DB 전환율 극대화. 방문 고객 피팅 전·후 영상은 최고의 신뢰 콘텐츠 — 동의 받고 반드시 촬영할 것.</div>
+      </div>
+    </div>
+
+    <!-- ── 5개월차 ── -->
+    <div class="phase-header" style="background:rgba(139,92,246,.25); border:1px solid rgba(139,92,246,.3); margin-top:32px">
+      <div class="phase-number">5</div>
+      <div class="phase-info">
+        <div class="phase-name">5개월차 — 매장 × 채널 시너지 구축</div>
+        <div class="phase-goal">목표: 방문객 리뷰 콘텐츠화, 선글라스 시즌 트래픽 흡수</div>
+      </div>
+      <div class="phase-kpi">
+        <span class="kv">2K+</span>
+        <span class="kl">목표 구독자</span>
+      </div>
+    </div>
+    <div class="content-row">
+      <div class="content-card">
+        <div class="type-dot" style="background:rgba(59,130,246,.2)">🧲</div>
+        <div>
+          <div class="card-title">여름 선글라스 완벽 가이드 — 얼굴형별 골라주는 법</div>
+          <div class="card-meta">풀링 | 유형⑤ 피팅변환형 | 시즌 트래픽 선점</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="type-dot" style="background:rgba(59,130,246,.2)">🧲</div>
+        <div>
+          <div class="card-title">실제 고객 피팅 스토리 — 10년 안경 고생이 끝났습니다</div>
+          <div class="card-meta">풀링 | 유형⑥ 체험실험형 | 사회적 증거 구축</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="type-dot" style="background:rgba(239,68,68,.2)">🔑</div>
+        <div>
+          <div class="card-title">선글라스 도수 넣으면 얼마? — 안경원이 말 안 해주는 진실</div>
+          <div class="card-meta">키컨 | 유형② 전문가폭로형 | 도수 선글라스 타겟 유입</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="type-dot" style="background:rgba(59,130,246,.2)">🧲</div>
+        <div>
+          <div class="card-title">크롬하츠 안경 관리법 — 현직 안경사가 알려주는 진짜 방법</div>
+          <div class="card-meta">풀링 | 유형② 전문가폭로형 | 크롬하츠 팬덤 심화</div>
+        </div>
+      </div>
+    </div>
+    <div class="strategy-box" style="background:rgba(59,130,246,.07); border:1px solid rgba(59,130,246,.2)">
+      <div class="s-icon">📌</div>
+      <div>
+        <div class="s-title" style="color:var(--blue)">5개월 핵심 전략</div>
+        <div class="s-body">5~8월은 선글라스 최대 시즌. 이 시기에 선글라스 관련 풀링 영상 2~3편으로 탐색 트래픽을 집중 흡수. 실제 방문 고객 피팅 스토리는 신뢰도와 전환율 모두 올리는 최강 포맷 — 꼭 정기 시리즈로 만들 것.</div>
+      </div>
+    </div>
+
+    <!-- ── 6개월차 ── -->
+    <div class="phase-header" style="background:rgba(139,92,246,.25); border:1px solid rgba(139,92,246,.3); margin-top:32px">
+      <div class="phase-number">6</div>
+      <div class="phase-info">
+        <div class="phase-name">6개월차 — 수익 구조 다각화 시작</div>
+        <div class="phase-goal">목표: 첫 공동구매 또는 제휴 협업 진행, 네이버 블로그 병행 시작</div>
+      </div>
+      <div class="phase-kpi">
+        <span class="kv">3K+</span>
+        <span class="kl">목표 구독자</span>
+      </div>
+    </div>
+    <div class="content-row">
+      <div class="content-card">
+        <div class="type-dot" style="background:rgba(239,68,68,.2)">🔑</div>
+        <div>
+          <div class="card-title">[구독자 한정] 여름 선글라스 공동구매 — 안경사 픽</div>
+          <div class="card-meta">키컨 | 첫 공동구매 | 수익 구조 검증</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="type-dot" style="background:rgba(59,130,246,.2)">🧲</div>
+        <div>
+          <div class="card-title">변색렌즈 완벽 가이드 — 안경+선글라스 동시에</div>
+          <div class="card-meta">풀링 | 유형⑤ 이것만알면형 | 고단가 렌즈 유입</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="type-dot" style="background:rgba(59,130,246,.2)">🧲</div>
+        <div>
+          <div class="card-title">안경 브랜드 협찬 리뷰 — 솔직하게 말씀드립니다</div>
+          <div class="card-meta">풀링 | 협찬 시작 | 수익화 채널 확보</div>
+        </div>
+      </div>
+      <div class="content-card">
+        <div class="type-dot" style="background:rgba(239,68,68,.2)">🔑</div>
+        <div>
+          <div class="card-title">고가 렌즈 선택법 — HOYA vs ZEISS 진짜 차이</div>
+          <div class="card-meta">키컨 | 유형④ 가격반전형 | 프리미엄 렌즈 전환</div>
+        </div>
+      </div>
+    </div>
+    <div class="strategy-box" style="background:rgba(34,197,94,.07); border:1px solid rgba(34,197,94,.2)">
+      <div class="s-icon">💰</div>
+      <div>
+        <div class="s-title" style="color:var(--green)">6개월 수익 구조 설계</div>
+        <div class="s-body">① 안경원 방문 매출 (피팅+렌즈) ② 공동구매 마진 ③ 브랜드 협찬 ④ 쿠팡 파트너스 링크. 네이버 블로그는 "브랜드명 후기 / 단점" 키워드로 구매 직전 검색 트래픽 흡수 — 유튜브 키컨으로 올리기엔 채널 데미지 우려 있는 주제를 블로그로 분리 처리.</div>
+      </div>
+    </div>
+
+    <!-- ── 7~9개월차 ── -->
+    <div class="phase-header" style="background:rgba(245,158,11,.2); border:1px solid rgba(245,158,11,.3); margin-top:40px">
+      <div class="phase-number" style="font-size:24px">7–9</div>
+      <div class="phase-info">
+        <div class="phase-name">7~9개월차 — 온라인 판매 본격화 + 시즌 콘텐츠 강화</div>
+        <div class="phase-goal">목표: 구독 5K 달성, 가을·겨울 시즌 콘텐츠로 연간 트래픽 평탄화</div>
+      </div>
+      <div class="phase-kpi">
+        <span class="kv">5K+</span>
+        <span class="kl">목표 구독자</span>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">7개월차</div>
+      <div class="content-row">
+        <div class="content-card">
+          <div class="type-dot" style="background:rgba(59,130,246,.2)">🧲</div>
+          <div>
+            <div class="card-title">가을 안경 트렌드 — 이 시즌 뭐가 잘 어울리나</div>
+            <div class="card-meta">풀링 | 시즌 트래픽 | 패션 타겟 유지</div>
+          </div>
+        </div>
+        <div class="content-card">
+          <div class="type-dot" style="background:rgba(239,68,68,.2)">🔑</div>
+          <div>
+            <div class="card-title">노안 안경 — 다초점 맞추기 전 반드시 확인할 것</div>
+            <div class="card-meta">키컨 | 40-50대 핵심 타겟 | 고단가 전환</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">8개월차</div>
+      <div class="content-row">
+        <div class="content-card">
+          <div class="type-dot" style="background:rgba(59,130,246,.2)">🧲</div>
+          <div>
+            <div class="card-title">수입 안경테 소재 완벽 정리 — 티타늄 vs 아세테이트 vs 뿔테</div>
+            <div class="card-meta">풀링 | 유형⑤ 이것만알면형 | 고관여 정보 콘텐츠</div>
+          </div>
+        </div>
+        <div class="content-card">
+          <div class="type-dot" style="background:rgba(59,130,246,.2)">🧲</div>
+          <div>
+            <div class="card-title">마수나가 vs 금자안경 — 일본 안경 양대산맥 비교</div>
+            <div class="card-meta">풀링 | 유형④ 가격반전형 | 하이엔드 팬덤 심화</div>
+          </div>
+        </div>
+        <div class="content-card">
+          <div class="type-dot" style="background:rgba(239,68,68,.2)">🔑</div>
+          <div>
+            <div class="card-title">[구독자 한정] 가을 안경테 공동구매 2차</div>
+            <div class="card-meta">키컨 | 공동구매 정례화 | 수익 구조 고정화</div>
+          </div>
+        </div>
+        <div class="content-card">
+          <div class="type-dot" style="background:rgba(59,130,246,.2)">🧲</div>
+          <div>
+            <div class="card-title">안경사 6개월 운영 솔직 후기 — 잘된 것 vs 후회한 것</div>
+            <div class="card-meta">풀링 | 유형⑩ 때려친이유형 변형 | 팬덤 강화</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">9개월차</div>
+      <div class="content-row">
+        <div class="content-card">
+          <div class="type-dot" style="background:rgba(59,130,246,.2)">🧲</div>
+          <div>
+            <div class="card-title">안경렌즈 압축의 진실 — 1.60 vs 1.67 vs 1.74 뭐가 다른가</div>
+            <div class="card-meta">풀링 | 유형② 전문가폭로형 | 고도근시 타겟 유입</div>
+          </div>
+        </div>
+        <div class="content-card">
+          <div class="type-dot" style="background:rgba(239,68,68,.2)">🔑</div>
+          <div>
+            <div class="card-title">고도근시 안경 — 이것 모르면 렌즈에 100만원 날립니다</div>
+            <div class="card-meta">키컨 | 유형① 손해후회형 | 고도근시 전환 목적</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="strategy-box" style="background:rgba(245,158,11,.07); border:1px solid rgba(245,158,11,.2)">
+      <div class="s-icon">📈</div>
+      <div>
+        <div class="s-title" style="color:var(--amber)">7~9개월 핵심 전략</div>
+        <div class="s-body">공동구매를 월 1회 정례화하여 안정적 수익 구조 확보. 채널 구독자 5K 돌파 시점에 협찬 제안 수신 시작 — 이 시점부터 인바운드 협업 시작 가능. "안경사 운영 후기" 시리즈는 구독자와의 유대감을 가장 빠르게 올리는 포맷으로 매 분기 1회 이상 제작.</div>
+      </div>
+    </div>
+
+    <!-- ── 10~12개월차 ── -->
+    <div class="phase-header" style="background:rgba(245,158,11,.2); border:1px solid rgba(245,158,11,.3); margin-top:40px">
+      <div class="phase-number" style="font-size:22px">10–12</div>
+      <div class="phase-info">
+        <div class="phase-name">10~12개월차 — 브랜드 확립 + 2년차 준비</div>
+        <div class="phase-goal">목표: 구독 1만 달성, 자체 브랜드/PB 상품 검토, 2호점 또는 온라인 스토어 확장</div>
+      </div>
+      <div class="phase-kpi">
+        <span class="kv">10K</span>
+        <span class="kl">목표 구독자</span>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">10개월차</div>
+      <div class="content-row">
+        <div class="content-card">
+          <div class="type-dot" style="background:rgba(59,130,246,.2)">🧲</div>
+          <div>
+            <div class="card-title">연말 선물용 안경 추천 — 예산별 완벽 가이드</div>
+            <div class="card-meta">풀링 | 연말 시즌 트래픽 | 선물 구매자 유입</div>
+          </div>
+        </div>
+        <div class="content-card">
+          <div class="type-dot" style="background:rgba(239,68,68,.2)">🔑</div>
+          <div>
+            <div class="card-title">1년간 안경원 운영했더니 — 매출·실수·깨달음 전부 공개</div>
+            <div class="card-meta">키컨 | 유형⑩ 때려친이유형 변형 | 최고 신뢰 콘텐츠</div>
+          </div>
+        </div>
+        <div class="content-card">
+          <div class="type-dot" style="background:rgba(59,130,246,.2)">🧲</div>
+          <div>
+            <div class="card-title">2026 안경 트렌드 예측 — 안경사가 미리 보는 내년 픽</div>
+            <div class="card-meta">풀링 | 트렌드 선점 | 연초 알고리즘 타이밍</div>
+          </div>
+        </div>
+        <div class="content-card">
+          <div class="type-dot" style="background:rgba(139,92,246,.2)">🌟</div>
+          <div>
+            <div class="card-title">[연말 이벤트] 구독자 피팅 무료 체험 추첨</div>
+            <div class="card-meta">특별기획 | 구독자 로열티 극대화 | DB 재활성화</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">11개월차</div>
+      <div class="content-row">
+        <div class="content-card">
+          <div class="type-dot" style="background:rgba(59,130,246,.2)">🧲</div>
+          <div>
+            <div class="card-title">구독자 1만 명과 함께하는 Q&A — 안경에 대해 뭐든 물어보세요</div>
+            <div class="card-meta">풀링 | 마일스톤 콘텐츠 | 팬덤 결속</div>
+          </div>
+        </div>
+        <div class="content-card">
+          <div class="type-dot" style="background:rgba(239,68,68,.2)">🔑</div>
+          <div>
+            <div class="card-title">온라인 안경 구매 — 이것만 알면 절대 실패 안 합니다</div>
+            <div class="card-meta">키컨 | 온라인 스토어 오픈 연계 | 전국 타겟</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="month-block">
+      <div class="month-label">12개월차 — 1주년 + 2년차 로드맵 공개</div>
+      <div class="content-row">
+        <div class="content-card">
+          <div class="type-dot" style="background:rgba(139,92,246,.2)">🌟</div>
+          <div>
+            <div class="card-title">채널 1주년 — 1년간 만든 영상 모두 공개 + 시청자 감사 이벤트</div>
+            <div class="card-meta">특별기획 | 브랜드 스토리 강화 | 신규 구독 유도</div>
+          </div>
+        </div>
+        <div class="content-card">
+          <div class="type-dot" style="background:rgba(239,68,68,.2)">🔑</div>
+          <div>
+            <div class="card-title">2년차 예고 — 온라인 스토어 오픈 / 자체 브랜드 출시 예정</div>
+            <div class="card-meta">키컨 | DB 재수집 | 2년차 기대감 조성</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="strategy-box" style="background:rgba(139,92,246,.07); border:1px solid rgba(139,92,246,.2)">
+      <div class="s-icon">🚀</div>
+      <div>
+        <div class="s-title" style="color:var(--purple)">10~12개월 핵심 전략</div>
+        <div class="s-body">구독자 1만 달성이 목표 — 이 시점부터 유튜브 협찬 단가, 공동구매 모수, 협업 제안 모두 급격히 올라감. "1년 운영 후기" 영상은 역대 최고 조회수 가능성 있는 키컨 — 매출·실수·수익 전부 솔직하게 공개할수록 신뢰 폭발. 온라인 스토어 또는 자체 PB 렌즈 케이스/클리너 출시를 2년차 첫 수익화 확장으로 설정.</div>
+      </div>
+    </div>
+
+    <!-- 수익 구조 로드맵 테이블 -->
+    <h3 style="color:#fff; font-size:16px; font-weight:700; margin: 40px 0 16px">월별 수익 구조 성장 로드맵</h3>
+    <table class="revenue-table">
+      <thead>
+        <tr>
+          <th>시기</th>
+          <th>주요 수익원</th>
+          <th>채널 구독자</th>
+          <th>핵심 지표</th>
+          <th>단계</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1~3개월</td>
+          <td>없음 (투자 기간)</td>
+          <td>0 → 500</td>
+          <td>CTR 10% 달성, 30초 유지율 60%+</td>
+          <td><span class="rev-badge" style="background:rgba(59,130,246,.15);color:var(--blue)">씨앗</span></td>
+        </tr>
+        <tr>
+          <td>4~6개월</td>
+          <td>안경원 피팅 매출 + 렌즈 판매</td>
+          <td>500 → 2,000</td>
+          <td>월 방문 고객 20명+, 객단가 30만원+</td>
+          <td><span class="rev-badge" style="background:rgba(139,92,246,.15);color:var(--purple)">발아</span></td>
+        </tr>
+        <tr>
+          <td>7~9개월</td>
+          <td>안경원 + 공동구매 + 협찬 시작</td>
+          <td>2,000 → 5,000</td>
+          <td>공동구매 월 1회, 협찬 건당 50만원+</td>
+          <td><span class="rev-badge" style="background:rgba(245,158,11,.15);color:var(--amber)">성장</span></td>
+        </tr>
+        <tr>
+          <td>10~12개월</td>
+          <td>안경원 + 공동구매 + 협찬 + 온라인</td>
+          <td>5,000 → 10,000</td>
+          <td>월 수익 300만원+, 기어비 최적화</td>
+          <td><span class="rev-badge" style="background:rgba(34,197,94,.15);color:var(--green)">수확</span></td>
+        </tr>
+        <tr>
+          <td>12개월 이후</td>
+          <td>안경원 × 온라인 × PB × 협찬 × 강의</td>
+          <td>10,000+</td>
+          <td>채널이 안경원 마케팅 비용 0원 대체</td>
+          <td><span class="rev-badge" style="background:rgba(139,92,246,.15);color:var(--purple)">확장</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 연간 요약 카드 -->
+    <div class="annual-summary">
+      <div class="summary-card">
+        <span class="s-val" style="color:var(--blue)">48+</span>
+        <div class="s-lbl">연간 총 영상 편수</div>
+      </div>
+      <div class="summary-card">
+        <span class="s-val" style="color:var(--coral)">16+</span>
+        <div class="s-lbl">키컨 (전환 영상)</div>
+      </div>
+      <div class="summary-card">
+        <span class="s-val" style="color:var(--teal)">10K</span>
+        <div class="s-lbl">12개월 목표 구독자</div>
+      </div>
+      <div class="summary-card">
+        <span class="s-val" style="color:var(--amber)">4개</span>
+        <div class="s-lbl">수익 채널 (안경원·공구·협찬·온라인)</div>
+      </div>
+    </div>
+
+    <!-- 최종 배너 -->
+    <div class="final-banner" style="margin-top:40px">
+      <h3>1년 후 이 채널이 하는 일</h3>
+      <p style="margin-bottom:20px">유튜브 채널이 안경원의 마케팅 비용 전체를 대체합니다.<br>광고비 0원으로 전국에서 고객이 찾아오는 구조를 만드는 것 — 그게 이 로드맵의 최종 목표입니다.</p>
+      <div class="final-arrow" style="flex-wrap:wrap; gap:8px; justify-content:center">
+        <div class="arrow-step" style="background:rgba(59,130,246,.2); border:1px solid rgba(59,130,246,.4); font-size:12px">전문가 채널<br><span style="font-size:10px;font-weight:400;color:var(--muted)">신뢰 자산</span></div>
+        <div class="arrow-line"></div>
+        <div class="arrow-step" style="background:rgba(239,68,68,.2); border:1px solid rgba(239,68,68,.4); font-size:12px">안경원 방문<br><span style="font-size:10px;font-weight:400;color:var(--muted)">오프라인 매출</span></div>
+        <div class="arrow-line"></div>
+        <div class="arrow-step" style="background:rgba(20,184,166,.2); border:1px solid rgba(20,184,166,.4); font-size:12px">공동구매<br><span style="font-size:10px;font-weight:400;color:var(--muted)">온라인 매출</span></div>
+        <div class="arrow-line"></div>
+        <div class="arrow-step" style="background:rgba(139,92,246,.2); border:1px solid rgba(139,92,246,.4); font-size:12px">협찬·협업<br><span style="font-size:10px;font-weight:400;color:var(--muted)">브랜드 수익</span></div>
+        <div class="arrow-line"></div>
+        <div class="arrow-step" style="background:rgba(245,158,11,.2); border:1px solid rgba(245,158,11,.4); font-size:12px">PB·확장<br><span style="font-size:10px;font-weight:400;color:var(--muted)">2년차 도약</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>
